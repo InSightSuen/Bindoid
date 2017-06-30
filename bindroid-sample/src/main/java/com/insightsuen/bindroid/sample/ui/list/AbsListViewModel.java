@@ -39,6 +39,7 @@ public class AbsListViewModel extends LifecycleViewModel implements RecyclerView
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter instanceof BindAdapter) {
             DiffCallBacks<ListItemViewModel> callBacks = new ListDiffCallbacks();
+            //noinspection unchecked
             mBinder = new RecyclerViewBinder<>((BindAdapter) adapter, callBacks);
             mBinder.setDetectMoves(true);
             mBinder.enableDispatch(new RecyclerViewBinder.UpdateDataCallbacks() {
@@ -87,7 +88,6 @@ public class AbsListViewModel extends LifecycleViewModel implements RecyclerView
     @Override
     public void onStart(Context context) {
         super.onStart(context);
-        mData = new ArrayList<>();
         refreshItemViewModelList();
     }
 
