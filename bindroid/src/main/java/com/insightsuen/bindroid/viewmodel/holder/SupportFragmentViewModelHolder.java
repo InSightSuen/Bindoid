@@ -10,7 +10,8 @@ import com.insightsuen.bindroid.viewmodel.BaseViewModel;
  * Created by InSight Suen on 2017/5/25.
  * A holder fragment retaining ViewModel across Activity re-creation.
  */
-public class SupportFragmentViewModelHolder<VM extends BaseViewModel> extends Fragment {
+public class SupportFragmentViewModelHolder<VM extends BaseViewModel> extends Fragment
+        implements ViewModelHolder<VM> {
 
     public static <VM extends BaseViewModel> SupportFragmentViewModelHolder<VM> newInstance(VM viewModel) {
         SupportFragmentViewModelHolder<VM> container = new SupportFragmentViewModelHolder<>();
@@ -26,7 +27,8 @@ public class SupportFragmentViewModelHolder<VM extends BaseViewModel> extends Fr
         setRetainInstance(true); // retains across Activity re-creation
     }
 
-    public void setViewModel(@Nullable VM viewModel) {
+    @Override
+    public void setViewModel(VM viewModel) {
         mViewModel = viewModel;
     }
 
