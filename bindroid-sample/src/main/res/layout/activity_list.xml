@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.insightsuen.bindroid.sample.ui.list.AbsListViewModel"/>
+            type="com.insightsuen.bindroid.sample.ui.list.SampleListViewModel"/>
     </data>
 
 

@@ -17,6 +17,7 @@ public class HandlerUtils {
      * Prior to Android 5, HandlerThread always keeps a stack local reference to the last message
      * that was sent to it. This method makes sure that stack local reference never stays there
      * for too long by sending new messages to it every second.
+     * @param looper the Looper Handler used.
      */
     public static void flushStackLocalLeaks(Looper looper) {
         Handler handler = new Handler(looper) {

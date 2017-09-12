@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.insightsuen.bindroid.sample.ui.list.item.ListItemViewModel"/>
+            type="com.insightsuen.bindroid.sample.ui.list.item.SampleItemViewModel"/>
     </data>
 
     <LinearLayout

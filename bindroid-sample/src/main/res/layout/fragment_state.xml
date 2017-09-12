@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class=".ui.fragment.StateBinding">
+
+        <variable
+            name="viewModel"
+            type="com.insightsuen.bindroid.sample.ui.fragment.StateFragmentViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.tagInfo}"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@={viewModel.info}"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onClickShowCreateTime(context)}"
+            android:text="Show Create Time"/>
+
+
+    </LinearLayout>
+</layout>

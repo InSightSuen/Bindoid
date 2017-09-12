@@ -7,17 +7,17 @@ import com.insightsuen.bindroid.component.recyclerview.DiffCallBacks;
 /**
  * Created by InSight Suen on 2017/6/10.
  */
-public final class ListItem {
+public final class SampleItem {
 
     private int mId;
     private String mName;
     private String mContent;
 
-    public ListItem(int id) {
+    public SampleItem(int id) {
         mId = id;
     }
 
-    public ListItem(int id, String name, String content) {
+    public SampleItem(int id, String name, String content) {
         mId = id;
         mName = name;
         mContent = content;
@@ -39,7 +39,7 @@ public final class ListItem {
         mContent = content;
     }
 
-    public boolean contentEquals(ListItem other) {
+    public boolean contentEquals(SampleItem other) {
         return TextUtils.equals(this.mName, other.mName) && TextUtils.equals(this.mContent, other.mContent);
     }
 
@@ -51,13 +51,13 @@ public final class ListItem {
         if (obj == this) {
             return true;
         }
-        if (obj instanceof ListItem) {
-            return this.mId == ((ListItem) obj).mId;
+        if (obj instanceof SampleItem) {
+            return this.mId == ((SampleItem) obj).mId;
         }
         return false;
     }
 
-    public static class ListItemDiffCallbacks extends DiffCallBacks<ListItem> {
+    public static class ListItemDiffCallbacks extends DiffCallBacks<SampleItem> {
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {

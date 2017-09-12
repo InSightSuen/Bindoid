@@ -2,7 +2,8 @@ package com.insightsuen.bindroid.sample.ui.main;
 
 import android.content.Context;
 
-import com.insightsuen.bindroid.sample.ui.list.AbsListActivity;
+import com.insightsuen.bindroid.sample.ui.fragment.FragmentTestActivity;
+import com.insightsuen.bindroid.sample.ui.list.SampleListActivity;
 import com.insightsuen.bindroid.viewmodel.LifecycleViewModel;
 
 /**
@@ -15,7 +16,15 @@ public class MainViewModel extends LifecycleViewModel {
         startListActivity(context);
     }
 
+    public void onClickFragmentActivity(Context context) {
+        startFragmentTestActivity(context);
+    }
+
     private void startListActivity(Context context) {
-        AbsListActivity.start(context);
+        SampleListActivity.start(context);
+    }
+
+    private void startFragmentTestActivity(Context context) {
+        FragmentTestActivity.start(context);
     }
 }

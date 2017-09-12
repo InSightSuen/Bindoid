@@ -2,14 +2,14 @@ package com.insightsuen.bindroid.sample.ui.list.item;
 
 import android.databinding.Bindable;
 
-import com.insightsuen.bindroid.sample.ui.list.AbsListViewModel;
-import com.insightsuen.bindroid.viewmodel.ItemViewModel;
+import com.insightsuen.bindroid.sample.ui.list.SampleListViewModel;
+import com.insightsuen.bindroid.viewmodel.ListItemViewModel;
 
 /**
  * Created by InSight Suen on 2017/6/28.
  * List item ViewModel
  */
-public class ListItemViewModel extends ItemViewModel<ListItem> {
+public class SampleItemViewModel extends ListItemViewModel<SampleItem> {
 
     @Bindable
     public String getName() {
@@ -25,15 +25,15 @@ public class ListItemViewModel extends ItemViewModel<ListItem> {
         mParent.removeItem(this);
     }
 
-    private AbsListViewModel mParent;
-    private ListItem mItem;
+    private SampleListViewModel mParent;
+    private SampleItem mItem;
 
-    public ListItemViewModel(AbsListViewModel parent, ListItem item) {
+    public SampleItemViewModel(SampleListViewModel parent, SampleItem item) {
         mParent = parent;
         mItem = item;
     }
 
-    public ListItem getListItem() {
+    public SampleItem getListItem() {
         return mItem;
     }
 
@@ -42,10 +42,10 @@ public class ListItemViewModel extends ItemViewModel<ListItem> {
         if (obj == null) {
             return false;
         }
-        if (obj.getClass() != ListItemViewModel.class) {
+        if (obj.getClass() != SampleItemViewModel.class) {
             return false;
         }
-        ListItemViewModel other = (ListItemViewModel) obj;
+        SampleItemViewModel other = (SampleItemViewModel) obj;
         return this.mItem.equals(other.mItem);
     }
 }

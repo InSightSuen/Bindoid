@@ -1,6 +1,8 @@
 package com.insightsuen.bindroid.viewmodel;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 
@@ -10,7 +12,9 @@ import java.lang.ref.WeakReference;
  * Created by InSight Suen on 2017/6/28.
  * Android lifecycle
  */
-public class LifecycleViewModel extends BaseViewModel {
+public abstract class LifecycleViewModel extends BaseViewModel {
+
+    private static final String EXTRA_VIEW_MODEL_STATE = "ViewModelState";
 
     private WeakReference<Context> mContext;
     private boolean mStopped = true;
@@ -23,6 +27,8 @@ public class LifecycleViewModel extends BaseViewModel {
         mRunning = false;
     }
 
+    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) { }
+
     @CallSuper
     public void onResume() {
         mRunning = true;
@@ -33,6 +39,8 @@ public class LifecycleViewModel extends BaseViewModel {
         mRunning = false;
     }
 
+    public void onSaveInstanceState(Bundle outState) { }
+
     @CallSuper
     public void onStop() {
         mRunning = false;
@@ -42,7 +50,7 @@ public class LifecycleViewModel extends BaseViewModel {
 
     @Nullable
     public Context getContext() {
-        if (mStopped) {
+        if (!mStopped) {
             return mContext.get();
         }
         return null;
@@ -56,4 +64,12 @@ public class LifecycleViewModel extends BaseViewModel {
         return mRunning;
     }
 
+    public static abstract class State implements Parcelable {
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+    }
 }

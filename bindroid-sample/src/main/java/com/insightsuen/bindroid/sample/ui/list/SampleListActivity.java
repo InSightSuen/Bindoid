@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.insightsuen.bindroid.component.recyclerview.BindAdapter;
 import com.insightsuen.bindroid.sample.R;
 import com.insightsuen.bindroid.sample.base.BaseActivity;
-import com.insightsuen.bindroid.sample.ui.list.item.ListItemViewModel;
+import com.insightsuen.bindroid.sample.ui.list.item.SampleItemViewModel;
 import com.insightsuen.bindroid.viewmodel.LifecycleViewModel;
 import com.insightsuen.bindroid.utils.ViewModelUtil;
 
@@ -22,12 +22,12 @@ import com.insightsuen.bindroid.utils.ViewModelUtil;
  * Created by InSight Suen on 2017/6/10.
  * AbsList test Activity
  */
-public class AbsListActivity extends BaseActivity<ListBinding> {
+public class SampleListActivity extends BaseActivity<ListBinding> {
 
     private static final String TAG_VIEW_MODEL = "ViewModel";
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, AbsListActivity.class);
+        Intent starter = new Intent(context, SampleListActivity.class);
         context.startActivity(starter);
     }
 
@@ -44,21 +44,21 @@ public class AbsListActivity extends BaseActivity<ListBinding> {
 
     @Override
     protected LifecycleViewModel createOrFindViewModel(@Nullable Bundle savedInstanceState) {
-        AbsListViewModel viewModel = ViewModelUtil.findFromFragmentManger(getSupportFragmentManager(), TAG_VIEW_MODEL);
+        SampleListViewModel viewModel = ViewModelUtil.findFromFragmentManger(getSupportFragmentManager(), TAG_VIEW_MODEL);
         if (viewModel == null) {
-            viewModel = new AbsListViewModel();
+            viewModel = new SampleListViewModel();
             ViewModelUtil.addToFragmentManager(getSupportFragmentManager(), viewModel, TAG_VIEW_MODEL);
         }
         return viewModel;
     }
 
     private void initWidgets() {
-        BindAdapter<ListItemViewModel> adapter = new ListAdapter();
+        BindAdapter<SampleItemViewModel> adapter = new ListAdapter();
         mBinding.rvList.setAdapter(adapter);
         mBinding.rvList.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private static class ListAdapter extends BindAdapter<ListItemViewModel> {
+    private static class ListAdapter extends BindAdapter<SampleItemViewModel> {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -68,7 +68,7 @@ public class AbsListActivity extends BaseActivity<ListBinding> {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ListItemViewModel viewModel = mItems.get(position);
+            SampleItemViewModel viewModel = mItems.get(position);
             if (holder instanceof ItemViewHolder) {
                 ((ItemViewHolder) holder).onBind(viewModel);
             }
@@ -88,7 +88,7 @@ public class AbsListActivity extends BaseActivity<ListBinding> {
                 mBinding = DataBindingUtil.bind(itemView);
             }
 
-            private void onBind(ListItemViewModel viewModel) {
+            private void onBind(SampleItemViewModel viewModel) {
                 mBinding.setViewModel(viewModel);
                 mBinding.executePendingBindings();
             }

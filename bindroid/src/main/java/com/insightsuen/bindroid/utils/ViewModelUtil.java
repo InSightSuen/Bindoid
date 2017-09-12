@@ -3,6 +3,7 @@ package com.insightsuen.bindroid.utils;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Build;
 
 import com.insightsuen.bindroid.viewmodel.BaseViewModel;
 import com.insightsuen.bindroid.viewmodel.holder.FragmentViewModelHolder;
@@ -23,14 +24,22 @@ public final class ViewModelUtil {
         Fragment holder = FragmentViewModelHolder.newInstance(viewModel);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(holder, tag);
-        transaction.commit();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            transaction.commitNow();
+        } else {
+            transaction.commit();
+        }
     }
 
     public static <VM extends BaseViewModel> void addToFragmentManager(android.support.v4.app.FragmentManager fragmentManager, VM viewModel, String tag) {
         android.support.v4.app.Fragment holder = SupportFragmentViewModelHolder.newInstance(viewModel);
         android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(holder, tag);
-        transaction.commit();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            transaction.commitNow();
+        } else {
+            transaction.commit();
+        }
     }
 
     @SuppressWarnings("unchecked")

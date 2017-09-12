@@ -8,8 +8,8 @@ import android.text.TextUtils;
 import com.insightsuen.bindroid.component.recyclerview.RecyclerViewBinder;
 import com.insightsuen.bindroid.component.recyclerview.BindAdapter;
 import com.insightsuen.bindroid.component.recyclerview.DiffCallBacks;
-import com.insightsuen.bindroid.sample.ui.list.item.ListItem;
-import com.insightsuen.bindroid.sample.ui.list.item.ListItemViewModel;
+import com.insightsuen.bindroid.sample.ui.list.item.SampleItem;
+import com.insightsuen.bindroid.sample.ui.list.item.SampleItemViewModel;
 import com.insightsuen.bindroid.viewmodel.LifecycleViewModel;
 import com.insightsuen.bindroid.component.recyclerview.RecyclerViewBindable;
 
@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by InSight Suen on 2017/6/10.
  * Abs List ViewModel
  */
-public class AbsListViewModel extends LifecycleViewModel implements RecyclerViewBindable {
+public class SampleListViewModel extends LifecycleViewModel implements RecyclerViewBindable {
 
     //////////////////////////////
     // Data binding block start //
@@ -38,7 +38,7 @@ public class AbsListViewModel extends LifecycleViewModel implements RecyclerView
     public void bind(RecyclerView recyclerView) {
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter instanceof BindAdapter) {
-            DiffCallBacks<ListItemViewModel> callBacks = new ListDiffCallbacks();
+            DiffCallBacks<SampleItemViewModel> callBacks = new ListDiffCallbacks();
             //noinspection unchecked
             mBinder = new RecyclerViewBinder<>((BindAdapter) adapter, callBacks);
             mBinder.setDetectMoves(true);
@@ -78,10 +78,10 @@ public class AbsListViewModel extends LifecycleViewModel implements RecyclerView
     ////////////////////////////
 
     private AtomicInteger mNextId = new AtomicInteger(0);
-    private List<ListItem> mData;
-    private RecyclerViewBinder<ListItemViewModel> mBinder;
+    private List<SampleItem> mData;
+    private RecyclerViewBinder<SampleItemViewModel> mBinder;
 
-    AbsListViewModel() {
+    SampleListViewModel() {
         mData = new ArrayList<>();
     }
 
@@ -104,9 +104,9 @@ public class AbsListViewModel extends LifecycleViewModel implements RecyclerView
     }
 
     private void refreshItemViewModelList() {
-        List<ListItemViewModel> viewModelList = new ArrayList<>();
-        for (ListItem item : mData) {
-            viewModelList.add(new ListItemViewModel(this, item));
+        List<SampleItemViewModel> viewModelList = new ArrayList<>();
+        for (SampleItem item : mData) {
+            viewModelList.add(new SampleItemViewModel(this, item));
         }
         if (mBinder != null) {
             mBinder.onUpdateData(viewModelList);
@@ -117,14 +117,14 @@ public class AbsListViewModel extends LifecycleViewModel implements RecyclerView
         Calendar now = Calendar.getInstance();
         SimpleDateFormat simple = new SimpleDateFormat("MM-dd hh:mm:ss", Locale.getDefault());
         SimpleDateFormat detail = new SimpleDateFormat("yyyy年MM月dd日 EEEE hh:mm:ss.SSS zz", Locale.CHINA);
-        ListItem newItem = new ListItem(mNextId.getAndIncrement(),
+        SampleItem newItem = new SampleItem(mNextId.getAndIncrement(),
                 simple.format(now.getTime()), detail.format(now.getTime()));
         mData.add(newItem);
 
         refreshItemViewModelList();
     }
 
-    public void removeItem(ListItemViewModel itemViewModel) {
+    public void removeItem(SampleItemViewModel itemViewModel) {
         mData.remove(itemViewModel.getListItem());
         refreshItemViewModelList();
     }
@@ -143,28 +143,28 @@ public class AbsListViewModel extends LifecycleViewModel implements RecyclerView
         refreshItemViewModelList();
     }
 
-    private static class ListDiffCallbacks extends DiffCallBacks<ListItemViewModel> {
+    private static class ListDiffCallbacks extends DiffCallBacks<SampleItemViewModel> {
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            ListItemViewModel oldItem = mOld.get(oldItemPosition);
-            ListItemViewModel newItem = mNew.get(newItemPosition);
+            SampleItemViewModel oldItem = mOld.get(oldItemPosition);
+            SampleItemViewModel newItem = mNew.get(newItemPosition);
             return oldItem != null && newItem != null && oldItem.equals(newItem);
         }
 
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            ListItemViewModel oldItem = mOld.get(oldItemPosition);
-            ListItemViewModel newItem = mNew.get(newItemPosition);
+            SampleItemViewModel oldItem = mOld.get(oldItemPosition);
+            SampleItemViewModel newItem = mNew.get(newItemPosition);
             return TextUtils.equals(oldItem.getName(), newItem.getName())
                     && TextUtils.equals(oldItem.getContent(), newItem.getContent());
         }
     }
 
-    private static class ShuffleComparator implements Comparator<ListItem> {
+    private static class ShuffleComparator implements Comparator<SampleItem> {
 
         @Override
-        public int compare(ListItem o1, ListItem o2) {
+        public int compare(SampleItem o1, SampleItem o2) {
             return (int) (Math.random() * 3) - 1;
         }
     }

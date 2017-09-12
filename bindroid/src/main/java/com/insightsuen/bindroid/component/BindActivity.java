@@ -30,10 +30,60 @@ public abstract class BindActivity<Binding extends ViewDataBinding> extends AppC
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, getLayoutRes());
-        LifecycleViewModel viewModel = createOrFindViewModel(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LifecycleViewModel viewModel = createOrFindViewModel(null);
         if (viewModel != null) {
             mBinding.setVariable(BR.viewModel, viewModel);
             viewModel.onStart(this);
+        }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        LifecycleViewModel viewModel = createOrFindViewModel(null);
+        if (viewModel != null) {
+            viewModel.onRestoreInstanceState(savedInstanceState);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LifecycleViewModel viewModel = createOrFindViewModel(null);
+        if (viewModel != null) {
+            viewModel.onResume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        LifecycleViewModel viewModel = createOrFindViewModel(null);
+        if (viewModel != null) {
+            viewModel.onPause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        LifecycleViewModel viewModel = createOrFindViewModel(null);
+        if (viewModel != null) {
+            viewModel.onStop();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        LifecycleViewModel viewModel = createOrFindViewModel(null);
+        if (viewModel != null) {
+            viewModel.onSaveInstanceState(outState);
         }
     }
 }

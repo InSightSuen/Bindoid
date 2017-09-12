@@ -22,7 +22,7 @@ public class RecyclerViewBinder<Item> {
 
     private static final String TAG = "RecyclerViewBinder";
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     public interface UpdateDataCallbacks {
 

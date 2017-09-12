@@ -15,8 +15,6 @@ import com.insightsuen.bindroid.utils.ViewModelUtil;
  */
 public class MainActivity extends BaseActivity<MainBinding> {
 
-    private static final String VIEW_MODEL_TAG = "ViewModel";
-
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_main;
@@ -25,10 +23,10 @@ public class MainActivity extends BaseActivity<MainBinding> {
     @Nullable
     @Override
     protected LifecycleViewModel createOrFindViewModel(@Nullable Bundle savedInstanceState) {
-        MainViewModel mainViewModel = ViewModelUtil.findFromFragmentManger(getSupportFragmentManager(), VIEW_MODEL_TAG);
+        MainViewModel mainViewModel = ViewModelUtil.findFromFragmentManger(getSupportFragmentManager(), TAG_VIEW_MODEL);
         if (mainViewModel == null) {
             mainViewModel = new MainViewModel();
-            ViewModelUtil.addToFragmentManager(getSupportFragmentManager(), mainViewModel, VIEW_MODEL_TAG);
+            ViewModelUtil.addToFragmentManager(getSupportFragmentManager(), mainViewModel, TAG_VIEW_MODEL);
         }
         return mainViewModel;
     }

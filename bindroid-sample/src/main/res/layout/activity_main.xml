@@ -20,6 +20,13 @@
             android:text="List Activity"
             android:textAllCaps="false"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:onClick="@{() -> viewModel.onClickFragmentActivity(context)}"
+            android:text="Fragment Test Activity"
+            android:textAllCaps="false"/>
+
     </LinearLayout>
 
 </layout>
